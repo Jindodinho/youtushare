@@ -77,9 +77,9 @@ class MoviesController < ApplicationController
       respond_to do |format|
         if user_action.save
           format.html { redirect_to root_path, notice: "#{user_action.action.capitalize} successfully" }
-          format.json { render :show, status: :created, location: movie }
+          format.json { render :index, status: :created, location: movie }
         else
-          format.html { render :new, status: :unprocessable_entity }
+          format.html { render :index, status: :unprocessable_entity }
           format.json { render json: movie.errors, status: :unprocessable_entity }
         end
       end
