@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_19_083707) do
+ActiveRecord::Schema.define(version: 2022_06_19_171318) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,17 @@ ActiveRecord::Schema.define(version: 2022_06_19_083707) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_movies_on_user_id"
     t.index ["youtube_id"], name: "index_movies_on_youtube_id", unique: true
+  end
+
+  create_table "user_actions", force: :cascade do |t|
+    t.bigint "user_id"
+    t.integer "action", default: 0, null: false
+    t.bigint "movie_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["movie_id"], name: "index_user_actions_on_movie_id"
+    t.index ["user_id", "movie_id", "action"], name: "index_user_actions_on_user_id_and_movie_id_and_action", unique: true
+    t.index ["user_id"], name: "index_user_actions_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

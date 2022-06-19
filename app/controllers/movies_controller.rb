@@ -4,7 +4,7 @@ class MoviesController < ApplicationController
 
   # GET /movies or /movies.json
   def index
-    @movies = Movie.all
+    @movies = Movie.all.includes(:user_actions).order(created_at: :desc)
   end
 
   # GET /movies/1 or /movies/1.json
@@ -66,6 +66,30 @@ class MoviesController < ApplicationController
   #     format.json { head :no_content }
   #   end
   # end
+
+  def vote
+    return unless params[:movie_id].present? && params[:vote].present?
+
+    movie = Movie.find_by(id: params[:movie_id])
+    if movie.present?
+      user_action = UserAction.find_or_initialize_by(user_id: current_user.id, movie_id: movie.id)
+      user_action.action = params[:vote] == 'vote' ? 'vote' : 'unvote'
+      respond_to do |format|
+        if user_action.save
+          format.html { redirect_to root_path, notice: "#{user_action.action.capitalize} successfully" }
+          format.json { render :show, status: :created, location: movie }
+        else
+          format.html { render :new, status: :unprocessable_entity }
+          format.json { render json: movie.errors, status: :unprocessable_entity }
+        end
+      end
+    else
+      respond_to do |format|
+        format.html { render :index, status: :unprocessable_entity }
+        format.json { render json: movie.errors, status: :unprocessable_entity }
+      end
+    end
+  end
 
   private
 

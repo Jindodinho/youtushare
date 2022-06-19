@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   root to: 'movies#index'
-  resources :movies
+  resources :movies do
+    post :vote
+  end
   devise_for :users do
     get '/users/sign_out' => 'devise/sessions#destroy'
   end

@@ -41,8 +41,37 @@
           <div class="col-xl-7 col-lg-7 col-md-7 col-12">
             <div class="about-text">
               <h3><%= movie.title %></h3>
-              <h4>Shared by: <%= movie.user&.username %></h4>
-              <p><%= movie.description %></a>
+              <div class="d-flex">
+                <span class="pe-3">
+                  <h4>Shared by: <%= movie.user&.username %></h4>
+                </span>
+                <span>
+                  <% user_actions = movie.user_actions.where(user_id: current_user.id) %>
+                  <% if user_actions.present? %>
+                    <% if user_actions.first.action == 'vote' %>
+                      <i class="fa-solid fa-thumbs-up" style="font-size: 20px;"></i>
+                    <% else %>
+                      <i class="fa-solid fa-thumbs-down" style="font-size: 20px;"></i>
+                    <% end %>
+                  <% else %>
+                    <%= link_to movie_vote_path(movie, vote: 'vote'), class: 'user-action-button me-2', data: { disable_with: 'Loading...' }, method: :post, remote: true do %>
+                      <i class="fa-regular fa-thumbs-up" style="font-size: 20px;"></i>
+                    <% end %>
+                    <%= link_to movie_vote_path(movie, vote: 'unvote'), class: 'user-action-button', data: { disable_with: 'Loading...' }, method: :post, remote: true do %>
+                      <i class="fa-regular fa-thumbs-down" style="font-size: 20px;"></i>
+                    <% end %>
+                  <% end %>
+                </span>
+              </div>
+              <div>
+                <span>
+                  <%= '89' %><i class="fa-regular fa-thumbs-up"></i>
+                </span>
+                <span>
+                  <%= '12' %><i class="fa-regular fa-thumbs-down"></i>
+                </span>
+              </div>
+              <p>Description: <%= movie.description %></a>
             </div>
           </div>
         <% end %>
