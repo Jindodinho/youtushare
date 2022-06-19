@@ -1,0 +1,74 @@
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Roboto Slab', serif;
+    font-size: 18px;
+    padding: 0;
+    margin: 0;
+    font-weight: 400;
+    position: relative;
+    line-height: 29px;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    transition: all 0.3s ease-out 0s;
+}
+
+button {
+    cursor: pointer;
+}
+
+*:focus {
+    outline: none;
+}
+
+button {
+    border: none;
+    font-family: 'Roboto Slab', serif;
+}
+
+span {
+    font-family: 'Roboto Slab', serif;
+}
+
+button:focus {
+    outline: none;
+}
+
+a {
+    font-family: 'Roboto Slab', serif;
+
+    &:hover {
+        text-decoration: none;
+        color: white !important;
+        background-color: #3384fc;
+        border-radius: 5px;
+    }
+    &:focus {
+        text-decoration: none;
+        color: white !important;
+        background-color: #3384fc;
+        border-radius: 5px;
+    }
+}
+
+table {
+    width: 100%;
+}
+
+p,
+li,
+span {
+    margin-bottom: 0;
+}
+
+.nav-item {
+    a {
+        padding: 10px;
+        font-size: 18px;
+    }
+}
