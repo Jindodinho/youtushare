@@ -20,9 +20,9 @@ default: &default
   # For details on connection pooling, see Rails configuration guide
   # https://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  host: localhost
-  username: manhnguyen
-  password: Jindo@11
+  # host: 
+  # username: 
+  # password: 
 
 development:
   <<: *default
@@ -83,6 +83,6 @@ test:
 #
 production:
   <<: *default
-  database: youtushare_production
-  username: youtushare
-  password: <%= ENV['YOUTUSHARE_DATABASE_PASSWORD'] %>
+  database: <%= ENV['DATABASE_URL'] $>
+  # username: youtushare
+  # password: <%= ENV['YOUTUSHARE_DATABASE_PASSWORD'] %>
