@@ -65,16 +65,14 @@
                   <% end %>
                 </span>
               </div>
-              <% if movie.votes_count == 0 && movie.unvotes_count == 0 %>
-                <div>
-                  <span>
-                    <%= movie.votes_count %><i class="fa-regular fa-thumbs-up"></i>
-                  </span>
-                  <span>
-                    <%= movie.unvotes_count %><i class="fa-regular fa-thumbs-down"></i>
-                  </span>
-                </div>
-              <% end %>
+              <div>
+                <span>
+                  <%= movie.votes_count %><i class="fa-regular fa-thumbs-up"></i>
+                </span>
+                <span>
+                  <%= movie.unvotes_count %><i class="fa-regular fa-thumbs-down"></i>
+                </span>
+              </div>
               <p>Description: <%= movie.description %></a>
             </div>
           </div>
