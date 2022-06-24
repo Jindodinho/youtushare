@@ -46,19 +46,21 @@
                   <h4>Shared by: <%= movie.user&.username %></h4>
                 </span>
                 <span>
-                  <% user_actions = movie.user_actions.where(user_id: current_user.id) %>
-                  <% if user_actions.present? %>
-                    <% if user_actions.first.action == 'vote' %>
-                      <i class="fa-solid fa-thumbs-up" style="font-size: 20px;"></i>
+                  <% if current_user %>
+                    <% user_actions = movie.user_actions.where(user_id: current_user.id) %>
+                    <% if user_actions.present? %>
+                      <% if user_actions.first.action == 'vote' %>
+                        <i class="fa-solid fa-thumbs-up" style="font-size: 20px;"></i>
+                      <% else %>
+                        <i class="fa-solid fa-thumbs-down" style="font-size: 20px;"></i>
+                      <% end %>
                     <% else %>
-                      <i class="fa-solid fa-thumbs-down" style="font-size: 20px;"></i>
-                    <% end %>
-                  <% else %>
-                    <%= link_to movie_vote_path(movie, vote: 'vote'), class: 'user-action-button me-2', data: { disable_with: 'Loading...' }, method: :post, remote: true do %>
-                      <i class="fa-regular fa-thumbs-up" style="font-size: 20px;"></i>
-                    <% end %>
-                    <%= link_to movie_vote_path(movie, vote: 'unvote'), class: 'user-action-button', data: { disable_with: 'Loading...' }, method: :post, remote: true do %>
-                      <i class="fa-regular fa-thumbs-down" style="font-size: 20px;"></i>
+                      <%= link_to movie_vote_path(movie, vote: 'vote'), class: 'user-action-button me-2', data: { disable_with: 'Loading...' }, method: :post, remote: true do %>
+                        <i class="fa-regular fa-thumbs-up" style="font-size: 20px;"></i>
+                      <% end %>
+                      <%= link_to movie_vote_path(movie, vote: 'unvote'), class: 'user-action-button', data: { disable_with: 'Loading...' }, method: :post, remote: true do %>
+                        <i class="fa-regular fa-thumbs-down" style="font-size: 20px;"></i>
+                      <% end %>
                     <% end %>
                   <% end %>
                 </span>
